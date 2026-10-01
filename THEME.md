@@ -1,6 +1,6 @@
 # Tally: theme and logo
 
-Direction: **muted petrol-green ledger cloth, soft chalk figures, one clay-orange signal.**
+Direction: **warm graphite, soft chalk figures, one dusty-rose accent.**
 The logo is a tally mark: four counted strokes, one struck across.
 
 > **Heads-up:** this repo had no app code when I built this, so the kit is a drop-in plus a faithful
@@ -17,7 +17,7 @@ The whole look comes from **one file, `theme/tokens.css`**. `CLAUDE.md` teaches 
 /theme add a light mode
 ```
 
-or in plain chat: "make the category colours quieter", "the orange is too loud".
+or in plain chat: "make the category colours quieter", "the rose is too pink".
 Claude Code edits the tokens, runs `node scripts/sync-brand.mjs` (regenerates the logo set and checks contrast), and checks the result by eye.
 Because components only read tokens, nothing else needs to change.
 
@@ -37,13 +37,21 @@ Open in a browser, no build step: `preview/transactions.html` (your screen, new 
 
 ## Palette (current)
 
-Surfaces `--slate-950…600` (page `#081517`), text `--chalk-100/300/500` (`#DBD9D0` / `#A5AFAB` / `#849090`),
-brand `--minium` (`#D2794F`), money in `--verdigris`, caution `--saffron`, danger `--madder`, nine `--cat-*` colours.
-The brand board always shows the live values and contrast.
+| Role | Tokens |
+|---|---|
+| Surfaces | `--ground-950` page `#161311`, then 900, 850, 800, 750, 700, 600 (borders) |
+| Text | `--chalk-100` `#DEDAD3`, `--chalk-300` `#B1ADA7`, `--chalk-500` `#918D86` |
+| Brand and primary action | `--accent` `#CA889E` (dusty rose), plus `-bright`, `-deep`, `-ink` |
+| Money in, cleared | `--positive` sage `#8DBF9A` |
+| Nearing a limit | `--caution` straw `#D6BB79` |
+| Over budget, destructive | `--danger` red `#ED6E63` |
+| Categories | nine `--cat-*` colours in one lightness band |
+
+Tokens are named by role, not hue, so a retheme never leaves a misleading name behind. `preview/brand.html` always shows the live values and contrast.
 
 Rules that keep it feeling designed:
 
-1. **Clay orange means brand or primary action.** Not decoration, not "bad".
+1. **The accent means brand or primary action.** Not decoration, not "bad".
 2. **Spending is not an alarm.** Outgoing amounts stay chalk; colour is for money in and limits crossed.
 3. **The tally stroke is the one recurring device:** active nav item, highlighted suggestion, cleared transaction.
 4. Money is tabular (`.num`), uses a true minus (U+2212), and dims the cents.

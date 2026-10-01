@@ -15,12 +15,12 @@ const wm = JSON.parse(readFileSync(join(root, "brand/src/wordmark.json"), "utf8"
 // ---- tokens --------------------------------------------------------------
 const tok = {};
 for (const m of css.matchAll(/--([\w-]+):\s*(#[0-9a-fA-F]{6})\b/g)) tok[m[1]] ??= m[2].toLowerCase();
-const need = ["slate-950", "slate-900", "slate-850", "slate-750", "slate-700", "chalk-100", "chalk-300", "chalk-500", "minium", "minium-deep", "minium-ink", "verdigris", "saffron", "madder"];
+const need = ["ground-950", "ground-900", "ground-850", "ground-750", "ground-700", "chalk-100", "chalk-300", "chalk-500", "accent", "accent-deep", "accent-ink", "positive", "caution", "danger"];
 const missing = need.filter((k) => !tok[k]);
 if (missing.length) { console.error("tokens.css is missing hex values for: " + missing.join(", ")); process.exit(2); }
 
-const INK = tok["slate-950"], TILE = tok["slate-900"], LINE = tok["slate-700"];
-const CHALK = tok["chalk-100"], MINIUM = tok.minium, MINIUM_DEEP = tok["minium-deep"];
+const INK = tok["ground-950"], TILE = tok["ground-900"], LINE = tok["ground-700"];
+const CHALK = tok["chalk-100"], ACCENT = tok.accent, ACCENT_DEEP = tok["accent-deep"];
 
 // ---- logo geometry -------------------------------------------------------
 // Four counted strokes and a fifth struck across. A mask knocks the bars out around the diagonal.
@@ -43,7 +43,7 @@ function favicon() {
   <mask id="kf" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="#fff"/>
     <line x1="9" y1="46" x2="55" y2="20" stroke="#000" stroke-width="13.5" stroke-linecap="round"/></mask>
   <g mask="url(#kf)" stroke="${CHALK}" stroke-width="7.2" stroke-linecap="round">${bars}</g>
-  <line x1="9" y1="46" x2="55" y2="20" stroke="${MINIUM}" stroke-width="7.2" stroke-linecap="round"/>
+  <line x1="9" y1="46" x2="55" y2="20" stroke="${ACCENT}" stroke-width="7.2" stroke-linecap="round"/>
 </svg>\n`;
 }
 
@@ -68,16 +68,16 @@ function lockup(bar, strike, wordFill, id) {
 }
 
 const out = {
-  "tally-mark.svg": svg64(markBody(CHALK, MINIUM, "k1")),
-  "tally-mark-on-light.svg": svg64(markBody(INK, MINIUM_DEEP, "k2")),
-  "tally-mark-on-minium.svg": svg64(markBody(INK, CHALK, "k3")),
+  "tally-mark.svg": svg64(markBody(CHALK, ACCENT, "k1")),
+  "tally-mark-on-light.svg": svg64(markBody(INK, ACCENT_DEEP, "k2")),
+  "tally-mark-on-accent.svg": svg64(markBody(INK, CHALK, "k3")),
   "tally-icon.svg": svg64(`<rect width="64" height="64" rx="15" fill="${TILE}"/>
   <rect x=".5" y=".5" width="63" height="63" rx="14.5" fill="none" stroke="${LINE}"/>
-  ${markBody(CHALK, MINIUM, "k4")}`),
-  "tally-icon-square.svg": svg64(`<rect width="64" height="64" fill="${TILE}"/>\n  ${markBody(CHALK, MINIUM, "k5")}`),
+  ${markBody(CHALK, ACCENT, "k4")}`),
+  "tally-icon-square.svg": svg64(`<rect width="64" height="64" fill="${TILE}"/>\n  ${markBody(CHALK, ACCENT, "k5")}`),
   "favicon.svg": favicon(),
-  "tally-logo.svg": lockup(CHALK, MINIUM, CHALK, "k6"),
-  "tally-logo-on-light.svg": lockup(INK, MINIUM_DEEP, INK, "k7"),
+  "tally-logo.svg": lockup(CHALK, ACCENT, CHALK, "k6"),
+  "tally-logo-on-light.svg": lockup(INK, ACCENT_DEEP, INK, "k7"),
   "tally-wordmark.svg": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 ${f(-wm.size * 0.78)} ${f(wm.width)} ${f(wm.size * 1.08)}" role="img" aria-label="Tally"><path d="${wm.d}" fill="${CHALK}"/></svg>\n`,
 };
 mkdirSync(join(root, "brand"), { recursive: true });
@@ -88,24 +88,24 @@ console.log(`wrote ${Object.keys(out).length} SVGs to brand/`);
 const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
 const lum = (hex) => { const n = parseInt(hex.slice(1), 16); return 0.2126 * lin(n >> 16) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255); };
 const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
-const surfaces = ["slate-950", "slate-900", "slate-850", "slate-750"];
-const texts = ["chalk-100", "chalk-300", "chalk-500", "minium", "verdigris", "saffron", "madder"];
+const surfaces = ["ground-950", "ground-900", "ground-850", "ground-750"];
+const texts = ["chalk-100", "chalk-300", "chalk-500", "accent", "positive", "caution", "danger"];
 console.log("\ncontrast (WCAG AA text = 4.5)\n" + "".padEnd(12) + surfaces.map((s) => s.padStart(11)).join(""));
 let bad = 0;
 for (const t of texts) {
   let row = t.padEnd(12);
   for (const s of surfaces) {
     const r = ratio(tok[t], tok[s]);
-    // slate-750 is only used for menus, where tertiary text never appears
-    const exempt = s === "slate-750" && t === "chalk-500";
+    // ground-750 is only used for menus, where tertiary text never appears
+    const exempt = s === "ground-750" && t === "chalk-500";
     const flag = r < 4.5 && !exempt ? "!" : " ";
     if (flag === "!") bad++;
     row += (r.toFixed(1) + flag).padStart(11);
   }
   console.log(row);
 }
-const ink = ratio(tok["minium-ink"], tok.minium);
-console.log(`\nbutton text on brand (minium-ink on minium): ${ink.toFixed(1)}${ink < 4.5 ? " !" : ""}`);
+const ink = ratio(tok["accent-ink"], tok.accent);
+console.log(`\nbutton text on brand (accent-ink on accent): ${ink.toFixed(1)}${ink < 4.5 ? " !" : ""}`);
 if (ink < 4.5) bad++;
 console.log(bad ? `\n${bad} pair(s) below 4.5:1 (marked !). Adjust lightness in theme/tokens.css.` : "\nAll text pairs pass AA.");
 

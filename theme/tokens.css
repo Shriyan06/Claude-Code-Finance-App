@@ -1,6 +1,6 @@
 /* ==========================================================================
    TALLY — design tokens
-   Dark petrol ledger, soft chalk text, one clay-orange signal.
+   Warm graphite, soft chalk text, one dusty-rose accent.
    THIS FILE IS THE ONLY PLACE COLOURS ARE DEFINED. Components read the semantic
    aliases below; after editing, run `node scripts/sync-brand.mjs`.
    ========================================================================== */
@@ -8,67 +8,64 @@
 :root {
   color-scheme: dark;
 
-  /* ---- Slate (surfaces) ------------------------------------------------ */
-  --slate-950: #081517; /* page background */
-  --slate-900: #0d1c1d; /* sidebar, footer */
-  --slate-850: #122123; /* cards, entry row, inputs */
-  --slate-800: #172628; /* row hover */
-  --slate-750: #1b2b2d; /* menus, popovers */
-  --slate-700: #273739; /* hairlines */
-  --slate-600: #3d5052; /* strong borders, ring outlines */
+  /* ---- Ground (surfaces) ------------------------------------------------ */
+  --ground-950: #161311; /* page background */
+  --ground-900: #1c1917; /* sidebar, footer */
+  --ground-850: #221f1d; /* cards, entry row, inputs */
+  --ground-800: #272421; /* row hover */
+  --ground-750: #2c2926; /* menus, popovers */
+  --ground-700: #383431; /* hairlines */
+  --ground-600: #504c49; /* strong borders, ring outlines */
 
   /* ---- Chalk (text) ---------------------------------------------------- */
-  --chalk-100: #dbd9d0; /* primary text */
-  --chalk-300: #a5afab; /* secondary text */
-  --chalk-500: #849090; /* tertiary text, placeholders */
+  --chalk-100: #dedad3; /* primary text */
+  --chalk-300: #b1ada7; /* secondary text */
+  --chalk-500: #918d86; /* tertiary text, placeholders */
 
   /* ---- Signals --------------------------------------------------------- */
-  --minium: #d2794f; /* brand + primary action. Named for the red-orange ink scribes used for ledger totals. */
-  --minium-bright: #e1875a; /* hover */
-  --minium-deep: #b85d35; /* brand orange on light backgrounds (logo on paper) */
-  --minium-ink: #170d08; /* text on minium */
-  --verdigris: #71b8a2; /* money in, cleared, success */
-  --saffron: #d1b46e; /* caution: nearing a budget limit */
-  --madder: #d47880; /* danger: over budget, destructive actions */
+  --accent: #ca889e; /* brand + primary action: buttons, focus, active nav, the logo's struck stroke */
+  --accent-bright: #db98ae; /* hover */
+  --accent-deep: #ab6980; /* the accent on light backgrounds (logo on paper) */
+  --accent-ink: #170c0f; /* text on accent */
+  --positive: #8dbf9a; /* money in, cleared, success */
+  --caution: #d6bb79; /* caution: nearing a budget limit */
+  --danger: #ed6e63; /* danger: over budget, destructive actions */
 
   /* ---- Categories (equal lightness, so no category shouts) -------------- */
   --cat-groceries: #86b281;
   --cat-dining: #d09b77;
   --cat-transport: #71a1ca;
   --cat-shopping: #b685b1;
-  --cat-gifts: #cd8894;
+  --cat-gifts: #cd8890;
   --cat-entertainment: #9590ca;
   --cat-health: #71b6b5;
-  --cat-utilities: #afb474;
+  --cat-utilities: #b6b171;
   --cat-misc: #859697;
 
   /* ---- Semantic aliases: use these in components ------------------------ */
-  --bg: var(--slate-950);
-  --bg-sidebar: var(--slate-900);
-  --surface: var(--slate-850);
-  --surface-hover: var(--slate-800);
-  --surface-raised: var(--slate-750);
-  --line: var(--slate-700);
-  --line-strong: var(--slate-600);
+  --bg: var(--ground-950);
+  --bg-sidebar: var(--ground-900);
+  --surface: var(--ground-850);
+  --surface-hover: var(--ground-800);
+  --surface-raised: var(--ground-750);
+  --line: var(--ground-700);
+  --line-strong: var(--ground-600);
 
   --text: var(--chalk-100);
   --text-2: var(--chalk-300);
   --text-3: var(--chalk-500);
 
-  --brand: var(--minium);
-  --brand-hover: var(--minium-bright);
-  --brand-ink: var(--minium-ink);
-  --brand-soft: color-mix(in srgb, var(--minium) 14%, transparent);
+  --brand: var(--accent);
+  --brand-hover: var(--accent-bright);
+  --brand-ink: var(--accent-ink);
+  --brand-soft: color-mix(in srgb, var(--accent) 14%, transparent);
 
-  --positive: var(--verdigris);
-  --positive-soft: color-mix(in srgb, var(--verdigris) 14%, transparent);
-  --caution-soft: color-mix(in srgb, var(--saffron) 14%, transparent);
-  --danger-soft: color-mix(in srgb, var(--madder) 14%, transparent);
-  --caution: var(--saffron);
-  --danger: var(--madder);
+  --positive-soft: color-mix(in srgb, var(--positive) 14%, transparent);
+  --caution-soft: color-mix(in srgb, var(--caution) 14%, transparent);
+  --danger-soft: color-mix(in srgb, var(--danger) 14%, transparent);
 
-  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--minium);
-  --selection: color-mix(in srgb, var(--minium) 32%, transparent);
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --selection: color-mix(in srgb, var(--accent) 32%, transparent);
 
   /* ---- Type ------------------------------------------------------------ */
   --font-display: "Bricolage Grotesque", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
@@ -145,10 +142,10 @@ h3 {
   color: var(--danger);
 }
 
-/* Scrollbars that belong to the slate, not the OS */
+/* Scrollbars that belong to the palette, not the OS */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--slate-600) transparent;
+  scrollbar-color: var(--ground-600) transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {

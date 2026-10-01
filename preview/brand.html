@@ -27,9 +27,9 @@
   .plate { border-radius: var(--radius-lg); min-height: 200px; display: grid; place-items: center; padding: 28px; border: 1px solid var(--line); }
   .plate img { max-width: 100%; height: 56px; }
   .plate small { display: block; }
-  .plate.on-slate { background: var(--bg-sidebar); }
+  .plate.on-ground { background: var(--bg-sidebar); }
   .plate.on-chalk { background: var(--chalk-100); border-color: transparent; }
-  .plate.on-minium { background: var(--minium); border-color: transparent; }
+  .plate.on-accent { background: var(--accent); border-color: transparent; }
   .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; color: var(--text-2); }
   .rules b { display: block; color: var(--text); margin-bottom: 4px; font-weight: 600; }
   .sizes { display: flex; align-items: flex-end; gap: 28px; margin-top: 8px; flex-wrap: wrap; }
@@ -97,7 +97,7 @@
     <div>
       <p class="eyebrow">Brand board · v1</p>
       <h1>Every transaction,<br><em>counted.</em></h1>
-      <p>Tally is a personal ledger. Petrol-green cloth, chalk-white figures, and a single orange stroke for whatever needs your attention.</p>
+      <p>Tally is a personal ledger. Warm graphite, soft chalk figures, and a single rose stroke for whatever needs your attention.</p>
     </div>
     <img class="tile" src="../brand/tally-icon.svg" alt="Tally app icon">
   </section>
@@ -105,15 +105,15 @@
   <section>
     <p class="eyebrow">Logo</p>
     <h2>Four counted, one struck.</h2>
-    <p class="lede">A tally is the oldest way to keep count of money owed. Four chalk strokes, then a fifth drawn across them in rubric orange, the ink that scribes used for ledger totals. The diagonal also reads as a line trending up. In the wordmark, the bars are cut to the exact height of the two l’s.</p>
+    <p class="lede">A tally is the oldest way to keep count of money owed. Four chalk strokes, then a fifth drawn across them in the accent colour. The diagonal also reads as a line trending up. In the wordmark, the bars are cut to the exact height of the two l’s.</p>
     <div class="plates">
-      <div class="plate on-slate"><img src="../brand/tally-logo.svg" alt="Tally logo on slate"></div>
+      <div class="plate on-ground"><img src="../brand/tally-logo.svg" alt="Tally logo on ground"></div>
       <div class="plate on-chalk"><img src="../brand/tally-logo-on-light.svg" alt="Tally logo on chalk"></div>
-      <div class="plate on-minium"><img src="../brand/tally-mark-on-minium.svg" style="height:88px" alt="Tally mark on minium"></div>
+      <div class="plate on-accent"><img src="../brand/tally-mark-on-accent.svg" style="height:88px" alt="Tally mark on accent"></div>
     </div>
     <div class="rules">
       <div><b>Clear space</b>Keep one bar-height clear on every side. Nothing crosses the diagonal.</div>
-      <div><b>Colour</b>Chalk strokes with orange diagonal on slate. Slate strokes with the deeper orange (<span data-hex-text="--minium-deep"></span>) on light. On orange: slate strokes, chalk diagonal.</div>
+      <div><b>Colour</b>Chalk strokes with the accent diagonal on dark. Dark strokes with the deeper accent (<span data-hex-text="--accent-deep"></span>) on light. On the accent colour: dark strokes, chalk diagonal.</div>
       <div><b>Smallest size</b>Lockup: 96px wide. Mark alone: 16px. Below 24px use the heavier favicon cut.</div>
     </div>
     <div class="sizes" style="margin-top:40px">
@@ -128,27 +128,27 @@
 
   <section>
     <p class="eyebrow">Colour</p>
-    <h2>Petrol, chalk, and one orange.</h2>
-    <p class="lede">Surfaces step up in even lightness from the page to menus. Text is chalk, never pure white. Orange is reserved for the brand and the primary action, so when it appears it means something.</p>
+    <h2>Graphite, chalk, and one rose.</h2>
+    <p class="lede">Surfaces step up in even lightness from the page to menus. Text is chalk, never pure white. The accent is reserved for the brand and the primary action, so when it appears it means something.</p>
     <div class="ramp">
-      <div data-bg="--slate-950"><b>Slate 950</b><span class="hex"></span><span>Page</span></div>
-      <div data-bg="--slate-900"><b>Slate 900</b><span class="hex"></span><span>Sidebar, footer</span></div>
-      <div data-bg="--slate-850"><b>Slate 850</b><span class="hex"></span><span>Cards, inputs</span></div>
-      <div data-bg="--slate-800"><b>Slate 800</b><span class="hex"></span><span>Row hover</span></div>
-      <div data-bg="--slate-750"><b>Slate 750</b><span class="hex"></span><span>Menus</span></div>
-      <div data-bg="--slate-700"><b>Slate 700</b><span class="hex"></span><span>Hairlines</span></div>
-      <div data-bg="--slate-600"><b>Slate 600</b><span class="hex"></span><span>Borders</span></div>
+      <div data-bg="--ground-950"><b>Ground 950</b><span class="hex"></span><span>Page</span></div>
+      <div data-bg="--ground-900"><b>Ground 900</b><span class="hex"></span><span>Sidebar, footer</span></div>
+      <div data-bg="--ground-850"><b>Ground 850</b><span class="hex"></span><span>Cards, inputs</span></div>
+      <div data-bg="--ground-800"><b>Ground 800</b><span class="hex"></span><span>Row hover</span></div>
+      <div data-bg="--ground-750"><b>Ground 750</b><span class="hex"></span><span>Menus</span></div>
+      <div data-bg="--ground-700"><b>Ground 700</b><span class="hex"></span><span>Hairlines</span></div>
+      <div data-bg="--ground-600"><b>Ground 600</b><span class="hex"></span><span>Borders</span></div>
     </div>
     <div class="signals">
-      <div class="sw" data-bg="--minium" data-fg="--minium-ink"><div><b>Minium</b>Brand, primary action, focus</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
-      <div class="sw" data-bg="--chalk-100" data-fg="--slate-950"><div><b>Chalk 100</b>Text</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
-      <div class="sw" data-bg="--chalk-300" data-fg="--slate-950"><div><b>Chalk 300</b>Secondary text</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
-      <div class="sw" data-bg="--chalk-500" data-fg="--slate-950"><div><b>Chalk 500</b>Labels, hints</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
-      <div class="sw" data-bg="--verdigris" data-fg="--slate-950"><div><b>Verdigris</b>Money in, cleared</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
-      <div class="sw" data-bg="--saffron" data-fg="--slate-950"><div><b>Saffron</b>Nearing a limit</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--accent" data-fg="--accent-ink"><div><b>Accent</b>Brand, primary action, focus</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--chalk-100" data-fg="--ground-950"><div><b>Chalk 100</b>Text</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--chalk-300" data-fg="--ground-950"><div><b>Chalk 300</b>Secondary text</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--chalk-500" data-fg="--ground-950"><div><b>Chalk 500</b>Labels, hints</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--positive" data-fg="--ground-950"><div><b>Positive</b>Money in, cleared</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--caution" data-fg="--ground-950"><div><b>Caution</b>Nearing a limit</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
     </div>
     <div class="signals" style="grid-template-columns:1fr 3fr">
-      <div class="sw" data-bg="--madder" data-fg="--slate-950" style="min-height:84px"><div><b>Madder</b>Over budget, delete</div><span class="hex"></span></div>
+      <div class="sw" data-bg="--danger" data-fg="--ground-950" style="min-height:84px"><div><b>Danger</b>Over budget, delete</div><span class="hex"></span></div>
       <div class="sw" style="background:var(--surface);border:1px solid var(--line);min-height:84px;color:var(--text-2)"><div><b style="color:var(--text)">Spending is not an alarm</b>Outgoing amounts stay chalk. Colour is spent only on money in, and on limits being crossed, so a coloured number always means something.</div></div>
     </div>
     <div class="cats">
@@ -219,7 +219,7 @@ document.querySelectorAll("[data-bg]").forEach((el) => {
   if (el.classList.contains("cat-sw")) el.querySelector("i").style.background = `var(${bg})`; else el.style.background = `var(${bg})`;
   if (fg) el.style.color = `var(${fg})`;
   const hex = tok(bg), h = el.querySelector(".hex"); if (h) h.textContent = hex.toUpperCase();
-  const cr = el.querySelector(".cr"); if (cr) cr.textContent = ratio(hex, fg ? tok(fg) : tok("--slate-950")).toFixed(1) + ":1 " + (fg === "--minium-ink" ? "with ink text" : "on page");
+  const cr = el.querySelector(".cr"); if (cr) cr.textContent = ratio(hex, fg ? tok(fg) : tok("--ground-950")).toFixed(1) + ":1 " + (fg === "--accent-ink" ? "with ink text" : "on page");
 });
 document.querySelectorAll("[data-hex-text]").forEach((el) => (el.textContent = tok(el.dataset.hexText).toUpperCase()));
 </script>

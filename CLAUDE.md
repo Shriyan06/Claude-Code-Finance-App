@@ -10,12 +10,12 @@ Translate that into token edits; don't touch component files for a colour change
 
 1. **Colours live only in `theme/tokens.css`.** Never write a hex, `rgb()` or Tailwind colour literal in a component, page or stylesheet. Use the semantic aliases (`--bg`, `--surface`, `--text`, `--text-2`, `--brand`, `--positive`, `--danger`, `--cat-*`).
 2. **If a component needs a colour that has no token,** add a token to `tokens.css` (raw colour in the palette block, alias in the semantic block) and use that. Soft tints use `color-mix(in srgb, var(--x) 14%, transparent)`, so they follow the palette automatically.
-3. **Keep the palette structure when you change its values:**
-   - the `--slate-*` ramp steps up evenly in lightness (950 page → 600 borders) and keeps one hue
-   - `--chalk-100/300/500` are the text tiers
-   - `--minium` is the single brand/primary-action colour; `--minium-ink` is the text on it; `--minium-deep` is the brand colour on light backgrounds
-   - `--verdigris` money in, `--saffron` caution, `--madder` danger
-   - `--cat-*` share one lightness band so no category shouts
+3. **Keep the palette structure when you change its values.** Tokens are named by role, not by hue, so they stay true whatever colours you pick:
+   - `--ground-950…600`: surfaces, stepping up evenly in lightness (950 page → 600 borders), one hue family
+   - `--chalk-100/300/500`: the three text tiers
+   - `--accent`: the single brand and primary-action colour; `--accent-bright` hover, `--accent-deep` on light backgrounds, `--accent-ink` text on top of it
+   - `--positive` money in / cleared, `--caution` approaching a limit, `--danger` over budget / destructive. Keep danger clearly red-ish and clearly different from the accent
+   - `--cat-*`: category colours, one shared lightness band so no category shouts
 4. **Brightness is controlled by lightness and chroma.** To make it "less bright": lower chroma on the signals and categories, lower lightness on chalk. To make it "bolder": raise chroma. Work in OKLCH when reasoning, write hex in the file.
 5. **Spending is not an alarm.** Outgoing amounts stay `--text`; colour is for money in and limits crossed. Don't change that unless asked.
 6. Type and shape also live in `tokens.css` (`--font-*`, `--text-*`, `--radius-*`, `--shadow-pop`). Changing fonts means updating the `next/font` imports as well (see `THEME.md`).
@@ -38,4 +38,4 @@ To rename the product, replace the outline: set the text in Bricolage Grotesque 
 
 ### Copy on the brand board
 
-`preview/brand.html` reads every colour from the tokens, but its headline and descriptions ("petrol, chalk, and one orange") describe the default palette. If a theme change makes them untrue, update the wording.
+`preview/brand.html` reads every colour from the tokens, but its headline and descriptions ("graphite, chalk, and one rose") describe the default palette. If a theme change makes them untrue, update the wording.
