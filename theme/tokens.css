@@ -1,44 +1,46 @@
 /* ==========================================================================
    TALLY — design tokens
-   Dark slate-teal ledger, chalk text, one rubric-orange signal.
-   Import once at the app root. Everything else should read from these.
+   Dark petrol ledger, soft chalk text, one clay-orange signal.
+   THIS FILE IS THE ONLY PLACE COLOURS ARE DEFINED. Components read the semantic
+   aliases below; after editing, run `node scripts/sync-brand.mjs`.
    ========================================================================== */
 
 :root {
   color-scheme: dark;
 
   /* ---- Slate (surfaces) ------------------------------------------------ */
-  --slate-950: #06191c; /* page background: deep petrol, like ledger cloth */
-  --slate-900: #0b2023; /* sidebar, footer */
-  --slate-850: #112629; /* cards, entry row, inputs */
-  --slate-800: #152b2e; /* row hover */
-  --slate-750: #193033; /* menus, popovers */
-  --slate-700: #253b3e; /* hairlines */
-  --slate-600: #3c5558; /* strong borders, ring outlines */
+  --slate-950: #081517; /* page background */
+  --slate-900: #0d1c1d; /* sidebar, footer */
+  --slate-850: #122123; /* cards, entry row, inputs */
+  --slate-800: #172628; /* row hover */
+  --slate-750: #1b2b2d; /* menus, popovers */
+  --slate-700: #273739; /* hairlines */
+  --slate-600: #3d5052; /* strong borders, ring outlines */
 
   /* ---- Chalk (text) ---------------------------------------------------- */
-  --chalk-100: #eeebe1; /* primary text    15.1:1 on slate-950 */
-  --chalk-300: #afbab6; /* secondary text   9.0:1 */
-  --chalk-500: #8b9898; /* tertiary, placeholders  6.1:1 (4.7:1 on menus) */
+  --chalk-100: #dbd9d0; /* primary text */
+  --chalk-300: #a5afab; /* secondary text */
+  --chalk-500: #849090; /* tertiary text, placeholders */
 
   /* ---- Signals --------------------------------------------------------- */
-  --minium: #f5723a; /* brand + primary action. Named for the red-orange ink scribes used for ledger totals. */
-  --minium-bright: #ff8b4f; /* hover */
-  --minium-ink: #2a1208; /* text on minium, 6.2:1 */
-  --verdigris: #63ceaf; /* money in, cleared, success */
-  --saffron: #eac25a; /* caution: nearing a budget limit */
-  --madder: #ed647c; /* danger: over budget, destructive actions */
+  --minium: #d2794f; /* brand + primary action. Named for the red-orange ink scribes used for ledger totals. */
+  --minium-bright: #e1875a; /* hover */
+  --minium-deep: #b85d35; /* brand orange on light backgrounds (logo on paper) */
+  --minium-ink: #170d08; /* text on minium */
+  --verdigris: #71b8a2; /* money in, cleared, success */
+  --saffron: #d1b46e; /* caution: nearing a budget limit */
+  --madder: #d47880; /* danger: over budget, destructive actions */
 
   /* ---- Categories (equal lightness, so no category shouts) -------------- */
-  --cat-groceries: #84c47d;
-  --cat-dining: #e9a364;
-  --cat-transport: #69afe8;
-  --cat-shopping: #cf88c8;
-  --cat-gifts: #eb8a9c;
-  --cat-entertainment: #a198eb;
-  --cat-health: #5bc8c8;
-  --cat-utilities: #d0bf5e;
-  --cat-misc: #8da3a4;
+  --cat-groceries: #86b281;
+  --cat-dining: #d09b77;
+  --cat-transport: #71a1ca;
+  --cat-shopping: #b685b1;
+  --cat-gifts: #cd8894;
+  --cat-entertainment: #9590ca;
+  --cat-health: #71b6b5;
+  --cat-utilities: #afb474;
+  --cat-misc: #859697;
 
   /* ---- Semantic aliases: use these in components ------------------------ */
   --bg: var(--slate-950);
@@ -56,15 +58,17 @@
   --brand: var(--minium);
   --brand-hover: var(--minium-bright);
   --brand-ink: var(--minium-ink);
-  --brand-soft: rgb(245 114 58 / 0.14);
+  --brand-soft: color-mix(in srgb, var(--minium) 14%, transparent);
 
   --positive: var(--verdigris);
-  --positive-soft: rgb(99 206 175 / 0.14);
+  --positive-soft: color-mix(in srgb, var(--verdigris) 14%, transparent);
+  --caution-soft: color-mix(in srgb, var(--saffron) 14%, transparent);
+  --danger-soft: color-mix(in srgb, var(--madder) 14%, transparent);
   --caution: var(--saffron);
   --danger: var(--madder);
 
   --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--minium);
-  --selection: rgb(245 114 58 / 0.32);
+  --selection: color-mix(in srgb, var(--minium) 32%, transparent);
 
   /* ---- Type ------------------------------------------------------------ */
   --font-display: "Bricolage Grotesque", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;

@@ -28,7 +28,7 @@
   .plate img { max-width: 100%; height: 56px; }
   .plate small { display: block; }
   .plate.on-slate { background: var(--bg-sidebar); }
-  .plate.on-chalk { background: #eeebe1; border-color: transparent; }
+  .plate.on-chalk { background: var(--chalk-100); border-color: transparent; }
   .plate.on-minium { background: var(--minium); border-color: transparent; }
   .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; color: var(--text-2); }
   .rules b { display: block; color: var(--text); margin-bottom: 4px; font-weight: 600; }
@@ -40,6 +40,7 @@
   .ramp { display: grid; grid-template-columns: repeat(7, 1fr); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line); }
   .ramp div { height: 120px; padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px; }
   .ramp b { font-weight: 600; }
+  .ramp div { color: var(--text); } .ramp div span:last-child { opacity: .6; }
   .ramp span { opacity: .75; font-variant-numeric: tabular-nums; }
   .signals { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr) 1fr 1fr; gap: 12px; margin-top: 12px; }
   .sw { border-radius: var(--radius-lg); padding: 14px; min-height: 148px; display: flex; flex-direction: column; justify-content: space-between; font-size: 12px; }
@@ -70,8 +71,8 @@
   .inline { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .chip { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
   .chip.in { background: var(--positive-soft); color: var(--positive); }
-  .chip.warn { background: rgb(234 194 90 / .14); color: var(--caution); }
-  .chip.over { background: rgb(237 100 124 / .14); color: var(--danger); }
+  .chip.warn { background: var(--caution-soft); color: var(--caution); }
+  .chip.over { background: var(--danger-soft); color: var(--danger); }
   .chip.brand { background: var(--brand-soft); color: var(--brand); }
   .bar { height: 8px; border-radius: 999px; background: var(--surface-raised); overflow: hidden; }
   .bar i { display: block; height: 100%; border-radius: inherit; }
@@ -112,7 +113,7 @@
     </div>
     <div class="rules">
       <div><b>Clear space</b>Keep one bar-height clear on every side. Nothing crosses the diagonal.</div>
-      <div><b>Colour</b>Chalk strokes with orange diagonal on slate. Slate strokes with a deeper orange (#E8591F) on light. On orange: slate strokes, chalk diagonal.</div>
+      <div><b>Colour</b>Chalk strokes with orange diagonal on slate. Slate strokes with the deeper orange (<span data-hex-text="--minium-deep"></span>) on light. On orange: slate strokes, chalk diagonal.</div>
       <div><b>Smallest size</b>Lockup: 96px wide. Mark alone: 16px. Below 24px use the heavier favicon cut.</div>
     </div>
     <div class="sizes" style="margin-top:40px">
@@ -130,36 +131,36 @@
     <h2>Petrol, chalk, and one orange.</h2>
     <p class="lede">Surfaces step up in even lightness from the page to menus. Text is chalk, never pure white. Orange is reserved for the brand and the primary action, so when it appears it means something.</p>
     <div class="ramp">
-      <div style="background:#06191c;color:var(--text)"><b>Slate 950</b><span>#06191C · page</span></div>
-      <div style="background:#0b2023;color:var(--text)"><b>Slate 900</b><span>#0B2023 · sidebar</span></div>
-      <div style="background:#112629;color:var(--text)"><b>Slate 850</b><span>#112629 · cards</span></div>
-      <div style="background:#152b2e;color:var(--text)"><b>Slate 800</b><span>#152B2E · hover</span></div>
-      <div style="background:#193033;color:var(--text)"><b>Slate 750</b><span>#193033 · menus</span></div>
-      <div style="background:#253b3e;color:var(--text)"><b>Slate 700</b><span>#253B3E · hairline</span></div>
-      <div style="background:#3c5558;color:var(--text)"><b>Slate 600</b><span>#3C5558 · borders</span></div>
+      <div data-bg="--slate-950"><b>Slate 950</b><span class="hex"></span><span>Page</span></div>
+      <div data-bg="--slate-900"><b>Slate 900</b><span class="hex"></span><span>Sidebar, footer</span></div>
+      <div data-bg="--slate-850"><b>Slate 850</b><span class="hex"></span><span>Cards, inputs</span></div>
+      <div data-bg="--slate-800"><b>Slate 800</b><span class="hex"></span><span>Row hover</span></div>
+      <div data-bg="--slate-750"><b>Slate 750</b><span class="hex"></span><span>Menus</span></div>
+      <div data-bg="--slate-700"><b>Slate 700</b><span class="hex"></span><span>Hairlines</span></div>
+      <div data-bg="--slate-600"><b>Slate 600</b><span class="hex"></span><span>Borders</span></div>
     </div>
     <div class="signals">
-      <div class="sw" style="background:var(--minium);color:var(--minium-ink)"><div><b>Minium</b>Brand, primary action, focus</div><span>#F5723A<br>6.2:1 with ink text</span></div>
-      <div class="sw" style="background:#eeebe1;color:#06191c"><div><b>Chalk 100</b>Text</div><span>#EEEBE1<br>15.1:1</span></div>
-      <div class="sw" style="background:#afbab6;color:#06191c"><div><b>Chalk 300</b>Secondary text</div><span>#AFBAB6<br>9.0:1</span></div>
-      <div class="sw" style="background:#8b9898;color:#06191c"><div><b>Chalk 500</b>Labels, hints</div><span>#8B9898<br>6.1:1</span></div>
-      <div class="sw" style="background:var(--verdigris);color:#06191c"><div><b>Verdigris</b>Money in, cleared</div><span>#63CEAF</span></div>
-      <div class="sw" style="background:var(--saffron);color:#06191c"><div><b>Saffron</b>Nearing a limit</div><span>#EAC25A</span></div>
+      <div class="sw" data-bg="--minium" data-fg="--minium-ink"><div><b>Minium</b>Brand, primary action, focus</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--chalk-100" data-fg="--slate-950"><div><b>Chalk 100</b>Text</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--chalk-300" data-fg="--slate-950"><div><b>Chalk 300</b>Secondary text</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--chalk-500" data-fg="--slate-950"><div><b>Chalk 500</b>Labels, hints</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--verdigris" data-fg="--slate-950"><div><b>Verdigris</b>Money in, cleared</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
+      <div class="sw" data-bg="--saffron" data-fg="--slate-950"><div><b>Saffron</b>Nearing a limit</div><span><span class="hex"></span><br><span class="cr"></span></span></div>
     </div>
     <div class="signals" style="grid-template-columns:1fr 3fr">
-      <div class="sw" style="background:var(--madder);color:#06191c;min-height:84px"><div><b>Madder</b>Over budget, delete</div><span>#ED647C</span></div>
-      <div class="sw" style="background:var(--surface);border:1px solid var(--line);min-height:84px;color:var(--text-2)"><div><b style="color:var(--text)">Spending is not an alarm</b>Outgoing amounts stay chalk. Colour is spent only on money in, and on limits being crossed, so a red number always means a real problem.</div></div>
+      <div class="sw" data-bg="--madder" data-fg="--slate-950" style="min-height:84px"><div><b>Madder</b>Over budget, delete</div><span class="hex"></span></div>
+      <div class="sw" style="background:var(--surface);border:1px solid var(--line);min-height:84px;color:var(--text-2)"><div><b style="color:var(--text)">Spending is not an alarm</b>Outgoing amounts stay chalk. Colour is spent only on money in, and on limits being crossed, so a coloured number always means something.</div></div>
     </div>
     <div class="cats">
-      <div class="cat-sw"><i style="background:var(--cat-groceries)"></i>Groceries<span>#84C47D</span></div>
-      <div class="cat-sw"><i style="background:var(--cat-dining)"></i>Dining<span>#E9A364</span></div>
-      <div class="cat-sw"><i style="background:var(--cat-transport)"></i>Transport<span>#69AFE8</span></div>
-      <div class="cat-sw"><i style="background:var(--cat-shopping)"></i>Shopping<span>#CF88C8</span></div>
-      <div class="cat-sw"><i style="background:var(--cat-gifts)"></i>Gifts<span>#EB8A9C</span></div>
-      <div class="cat-sw"><i style="background:var(--cat-entertainment)"></i>Entertainment<span>#A198EB</span></div>
-      <div class="cat-sw"><i style="background:var(--cat-health)"></i>Health<span>#5BC8C8</span></div>
-      <div class="cat-sw"><i style="background:var(--cat-utilities)"></i>Utilities<span>#D0BF5E</span></div>
-      <div class="cat-sw"><i style="background:var(--cat-misc)"></i>Misc<span>#8DA3A4</span></div>
+      <div class="cat-sw" data-bg="--cat-groceries"><i></i>Groceries<span class="hex"></span></div>
+      <div class="cat-sw" data-bg="--cat-dining"><i></i>Dining<span class="hex"></span></div>
+      <div class="cat-sw" data-bg="--cat-transport"><i></i>Transport<span class="hex"></span></div>
+      <div class="cat-sw" data-bg="--cat-shopping"><i></i>Shopping<span class="hex"></span></div>
+      <div class="cat-sw" data-bg="--cat-gifts"><i></i>Gifts<span class="hex"></span></div>
+      <div class="cat-sw" data-bg="--cat-entertainment"><i></i>Entertainment<span class="hex"></span></div>
+      <div class="cat-sw" data-bg="--cat-health"><i></i>Health<span class="hex"></span></div>
+      <div class="cat-sw" data-bg="--cat-utilities"><i></i>Utilities<span class="hex"></span></div>
+      <div class="cat-sw" data-bg="--cat-misc"><i></i>Misc<span class="hex"></span></div>
     </div>
   </section>
 
@@ -185,7 +186,7 @@
     <div class="kit">
       <div class="spec">
         <div class="name">Buttons &amp; status</div>
-        <div class="inline"><button class="btn btn-primary">New transaction</button><button class="btn btn-ghost">Export CSV</button><button class="btn btn-ghost" style="color:var(--danger);border-color:rgb(237 100 124 / .35)">Delete</button></div>
+        <div class="inline"><button class="btn btn-primary">New transaction</button><button class="btn btn-ghost">Export CSV</button><button class="btn btn-ghost" style="color:var(--danger);border-color:color-mix(in srgb, var(--danger) 35%, transparent)">Delete</button></div>
         <div class="inline"><span class="chip in">Cleared</span><span class="chip brand">Needs category</span><span class="chip warn">82% of budget</span><span class="chip over">Over by $42</span></div>
         <div class="inline" style="gap:24px">
           <span class="inline" style="gap:10px;color:var(--text-2)"><span class="ring"></span>Not cleared</span>
@@ -205,5 +206,22 @@
     </div>
   </section>
 </main>
+<script>
+// Everything on this page reads from theme/tokens.css. Hex labels and contrast are computed live.
+const cs = getComputedStyle(document.documentElement);
+const tok = (n) => cs.getPropertyValue(n).trim();
+const rgb = (h) => { const n = parseInt(h.replace("#", ""), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+const lin = (c) => { c /= 255; return c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4; };
+const lum = (h) => { const [r, g, b] = rgb(h); return .2126 * lin(r) + .7152 * lin(g) + .0722 * lin(b); };
+const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + .05) / (y + .05); };
+document.querySelectorAll("[data-bg]").forEach((el) => {
+  const bg = el.dataset.bg, fg = el.dataset.fg;
+  if (el.classList.contains("cat-sw")) el.querySelector("i").style.background = `var(${bg})`; else el.style.background = `var(${bg})`;
+  if (fg) el.style.color = `var(${fg})`;
+  const hex = tok(bg), h = el.querySelector(".hex"); if (h) h.textContent = hex.toUpperCase();
+  const cr = el.querySelector(".cr"); if (cr) cr.textContent = ratio(hex, fg ? tok(fg) : tok("--slate-950")).toFixed(1) + ":1 " + (fg === "--minium-ink" ? "with ink text" : "on page");
+});
+document.querySelectorAll("[data-hex-text]").forEach((el) => (el.textContent = tok(el.dataset.hexText).toUpperCase()));
+</script>
 </body>
 </html>
