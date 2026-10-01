@@ -1,0 +1,157 @@
+/* ==========================================================================
+   TALLY — design tokens
+   Dark slate-teal ledger, chalk text, one rubric-orange signal.
+   Import once at the app root. Everything else should read from these.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- Slate (surfaces) ------------------------------------------------ */
+  --slate-950: #06191c; /* page background: deep petrol, like ledger cloth */
+  --slate-900: #0b2023; /* sidebar, footer */
+  --slate-850: #112629; /* cards, entry row, inputs */
+  --slate-800: #152b2e; /* row hover */
+  --slate-750: #193033; /* menus, popovers */
+  --slate-700: #253b3e; /* hairlines */
+  --slate-600: #3c5558; /* strong borders, ring outlines */
+
+  /* ---- Chalk (text) ---------------------------------------------------- */
+  --chalk-100: #eeebe1; /* primary text    15.1:1 on slate-950 */
+  --chalk-300: #afbab6; /* secondary text   9.0:1 */
+  --chalk-500: #8b9898; /* tertiary, placeholders  6.1:1 (4.7:1 on menus) */
+
+  /* ---- Signals --------------------------------------------------------- */
+  --minium: #f5723a; /* brand + primary action. Named for the red-orange ink scribes used for ledger totals. */
+  --minium-bright: #ff8b4f; /* hover */
+  --minium-ink: #2a1208; /* text on minium, 6.2:1 */
+  --verdigris: #63ceaf; /* money in, cleared, success */
+  --saffron: #eac25a; /* caution: nearing a budget limit */
+  --madder: #ed647c; /* danger: over budget, destructive actions */
+
+  /* ---- Categories (equal lightness, so no category shouts) -------------- */
+  --cat-groceries: #84c47d;
+  --cat-dining: #e9a364;
+  --cat-transport: #69afe8;
+  --cat-shopping: #cf88c8;
+  --cat-gifts: #eb8a9c;
+  --cat-entertainment: #a198eb;
+  --cat-health: #5bc8c8;
+  --cat-utilities: #d0bf5e;
+  --cat-misc: #8da3a4;
+
+  /* ---- Semantic aliases: use these in components ------------------------ */
+  --bg: var(--slate-950);
+  --bg-sidebar: var(--slate-900);
+  --surface: var(--slate-850);
+  --surface-hover: var(--slate-800);
+  --surface-raised: var(--slate-750);
+  --line: var(--slate-700);
+  --line-strong: var(--slate-600);
+
+  --text: var(--chalk-100);
+  --text-2: var(--chalk-300);
+  --text-3: var(--chalk-500);
+
+  --brand: var(--minium);
+  --brand-hover: var(--minium-bright);
+  --brand-ink: var(--minium-ink);
+  --brand-soft: rgb(245 114 58 / 0.14);
+
+  --positive: var(--verdigris);
+  --positive-soft: rgb(99 206 175 / 0.14);
+  --caution: var(--saffron);
+  --danger: var(--madder);
+
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--minium);
+  --selection: rgb(245 114 58 / 0.32);
+
+  /* ---- Type ------------------------------------------------------------ */
+  --font-display: "Bricolage Grotesque", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-ui: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-xs: 0.6875rem; /* 11  table headers, captions */
+  --text-sm: 0.8125rem; /* 13  table body, controls   */
+  --text-md: 0.9375rem; /* 15  body                   */
+  --text-lg: 1.25rem; /* 20  section titles         */
+  --text-xl: 1.625rem; /* 26  page titles            */
+  --text-2xl: 2.5rem; /* 40  hero numbers           */
+
+  /* ---- Shape & depth ---------------------------------------------------- */
+  --radius-sm: 6px; /* chips, checkboxes   */
+  --radius-md: 8px; /* inputs, buttons     */
+  --radius-lg: 12px; /* cards, popovers     */
+  --shadow-pop: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 12px 32px rgb(0 0 0 / 0.45), 0 2px 6px rgb(0 0 0 / 0.3);
+
+  --row-h: 36px;
+  --sidebar-w: 240px;
+}
+
+/* ---- Base ---------------------------------------------------------------- */
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 48;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+::selection {
+  background: var(--selection);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Money: always tabular so columns line up, minus sign is a true minus (U+2212). */
+.num {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1;
+}
+.num .cents {
+  opacity: 0.6;
+}
+.amount-in {
+  color: var(--positive);
+}
+.amount-out {
+  color: var(--text); /* spending is the default state, so it isn't alarming */
+}
+.amount-over {
+  color: var(--danger);
+}
+
+/* Scrollbars that belong to the slate, not the OS */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--slate-600) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

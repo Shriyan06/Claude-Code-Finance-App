@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tally brand board</title>
+<link rel="icon" href="../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../theme/tokens.css">
+<link rel="stylesheet" href="app.css">
+<style>
+  .sheet { max-width: 1120px; margin: 0 auto; padding: 56px 32px 96px; }
+  .sheet > section { padding: 56px 0; border-top: 1px solid var(--line); }
+  .sheet > section:first-of-type { border-top: 0; padding-top: 0; }
+  .eyebrow { font-size: var(--text-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin: 0 0 14px; }
+  .sheet h2 { font-size: var(--text-lg); margin-bottom: 8px; }
+  .lede { color: var(--text-2); max-width: 60ch; font-size: var(--text-md); margin: 0 0 32px; line-height: 1.55; }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; padding-bottom: 72px !important; }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); line-height: .98; letter-spacing: -.035em; font-variation-settings: "opsz" 96; font-weight: 700; }
+  .hero h1 em { font-style: normal; color: var(--brand); }
+  .hero p { color: var(--text-2); font-size: var(--text-md); max-width: 44ch; margin: 22px 0 0; line-height: 1.55; }
+  .hero .tile { justify-self: end; width: min(100%, 340px); aspect-ratio: 1; filter: drop-shadow(0 30px 50px rgb(0 0 0 / .45)); }
+
+  /* logo plates */
+  .plates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .plate { border-radius: var(--radius-lg); min-height: 200px; display: grid; place-items: center; padding: 28px; border: 1px solid var(--line); }
+  .plate img { max-width: 100%; height: 56px; }
+  .plate small { display: block; }
+  .plate.on-slate { background: var(--bg-sidebar); }
+  .plate.on-chalk { background: #eeebe1; border-color: transparent; }
+  .plate.on-minium { background: var(--minium); border-color: transparent; }
+  .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; color: var(--text-2); }
+  .rules b { display: block; color: var(--text); margin-bottom: 4px; font-weight: 600; }
+  .sizes { display: flex; align-items: flex-end; gap: 28px; margin-top: 8px; flex-wrap: wrap; }
+  .sizes figure { margin: 0; text-align: center; color: var(--text-3); font-size: 12px; }
+  .sizes img { display: block; margin: 0 auto 10px; }
+
+  /* palette */
+  .ramp { display: grid; grid-template-columns: repeat(7, 1fr); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line); }
+  .ramp div { height: 120px; padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px; }
+  .ramp b { font-weight: 600; }
+  .ramp span { opacity: .75; font-variant-numeric: tabular-nums; }
+  .signals { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr) 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .sw { border-radius: var(--radius-lg); padding: 14px; min-height: 148px; display: flex; flex-direction: column; justify-content: space-between; font-size: 12px; }
+  .sw b { font-size: 15px; font-family: var(--font-display); font-weight: 600; letter-spacing: -.01em; display: block; }
+  .sw span { font-variant-numeric: tabular-nums; opacity: .8; display: block; line-height: 1.5; }
+  .cats { display: grid; grid-template-columns: repeat(9, 1fr); gap: 12px; margin-top: 12px; }
+  .cat-sw { font-size: 12px; color: var(--text-2); }
+  .cat-sw i { display: block; height: 44px; border-radius: var(--radius-md); margin-bottom: 8px; }
+  .cat-sw span { display: block; color: var(--text-3); font-variant-numeric: tabular-nums; }
+
+  /* type */
+  .type { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .spec { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px; }
+  .spec .big { font-size: 88px; line-height: 1; letter-spacing: -.04em; margin: 8px 0 20px; }
+  .spec .name { font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+  .spec p { color: var(--text-2); margin: 0 0 6px; }
+  .disp { font-family: var(--font-display); font-variation-settings: "opsz" 96; font-weight: 700; }
+  .ui { font-family: var(--font-ui); font-weight: 500; }
+  .ledgerdemo { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .ledgerdemo .k { font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+  .ledgerdemo .v { font-family: var(--font-display); font-variation-settings: "opsz" 72; font-weight: 600; font-size: 40px; letter-spacing: -.03em; margin-top: 6px; }
+  .ledgerdemo .v .cents { font-size: 24px; }
+  .ledgerdemo .n { color: var(--text-3); font-size: 12px; margin-top: 4px; }
+
+  /* kit */
+  .kit { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .kit .spec { display: flex; flex-direction: column; gap: 16px; }
+  .inline { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .chip.in { background: var(--positive-soft); color: var(--positive); }
+  .chip.warn { background: rgb(234 194 90 / .14); color: var(--caution); }
+  .chip.over { background: rgb(237 100 124 / .14); color: var(--danger); }
+  .chip.brand { background: var(--brand-soft); color: var(--brand); }
+  .bar { height: 8px; border-radius: 999px; background: var(--surface-raised); overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: inherit; }
+  .budget { display: grid; gap: 14px; }
+  .budget .l { display: flex; justify-content: space-between; margin-bottom: 6px; color: var(--text); font-weight: 500; }
+  .budget .l span:last-child { color: var(--text-2); font-weight: 400; }
+
+  @media (max-width: 900px) {
+    .hero, .type, .kit, .rules, .plates { grid-template-columns: 1fr; }
+    .hero .tile { justify-self: start; width: 200px; }
+    .ramp { grid-template-columns: repeat(4, 1fr); }
+    .signals { grid-template-columns: repeat(2, 1fr); }
+    .cats { grid-template-columns: repeat(3, 1fr); }
+    .ledgerdemo { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Brand board · v1</p>
+      <h1>Every transaction,<br><em>counted.</em></h1>
+      <p>Tally is a personal ledger. Petrol-green cloth, chalk-white figures, and a single orange stroke for whatever needs your attention.</p>
+    </div>
+    <img class="tile" src="../brand/tally-icon.svg" alt="Tally app icon">
+  </section>
+
+  <section>
+    <p class="eyebrow">Logo</p>
+    <h2>Four counted, one struck.</h2>
+    <p class="lede">A tally is the oldest way to keep count of money owed. Four chalk strokes, then a fifth drawn across them in rubric orange, the ink that scribes used for ledger totals. The diagonal also reads as a line trending up. In the wordmark, the bars are cut to the exact height of the two l’s.</p>
+    <div class="plates">
+      <div class="plate on-slate"><img src="../brand/tally-logo.svg" alt="Tally logo on slate"></div>
+      <div class="plate on-chalk"><img src="../brand/tally-logo-on-light.svg" alt="Tally logo on chalk"></div>
+      <div class="plate on-minium"><img src="../brand/tally-mark-on-minium.svg" style="height:88px" alt="Tally mark on minium"></div>
+    </div>
+    <div class="rules">
+      <div><b>Clear space</b>Keep one bar-height clear on every side. Nothing crosses the diagonal.</div>
+      <div><b>Colour</b>Chalk strokes with orange diagonal on slate. Slate strokes with a deeper orange (#E8591F) on light. On orange: slate strokes, chalk diagonal.</div>
+      <div><b>Smallest size</b>Lockup: 96px wide. Mark alone: 16px. Below 24px use the heavier favicon cut.</div>
+    </div>
+    <div class="sizes" style="margin-top:40px">
+      <figure><img src="../brand/tally-icon.svg" width="96" alt=""><span>App icon</span></figure>
+      <figure><img src="../brand/tally-icon.svg" width="48" alt=""><span>48</span></figure>
+      <figure><img src="../brand/favicon.svg" width="32" alt=""><span>Favicon 32</span></figure>
+      <figure><img src="../brand/favicon.svg" width="16" alt=""><span>16</span></figure>
+      <figure><img src="../brand/tally-mark.svg" width="64" alt=""><span>Mark</span></figure>
+      <figure><img src="../brand/tally-wordmark.svg" height="34" alt=""><span>Wordmark</span></figure>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Colour</p>
+    <h2>Petrol, chalk, and one orange.</h2>
+    <p class="lede">Surfaces step up in even lightness from the page to menus. Text is chalk, never pure white. Orange is reserved for the brand and the primary action, so when it appears it means something.</p>
+    <div class="ramp">
+      <div style="background:#06191c;color:var(--text)"><b>Slate 950</b><span>#06191C · page</span></div>
+      <div style="background:#0b2023;color:var(--text)"><b>Slate 900</b><span>#0B2023 · sidebar</span></div>
+      <div style="background:#112629;color:var(--text)"><b>Slate 850</b><span>#112629 · cards</span></div>
+      <div style="background:#152b2e;color:var(--text)"><b>Slate 800</b><span>#152B2E · hover</span></div>
+      <div style="background:#193033;color:var(--text)"><b>Slate 750</b><span>#193033 · menus</span></div>
+      <div style="background:#253b3e;color:var(--text)"><b>Slate 700</b><span>#253B3E · hairline</span></div>
+      <div style="background:#3c5558;color:var(--text)"><b>Slate 600</b><span>#3C5558 · borders</span></div>
+    </div>
+    <div class="signals">
+      <div class="sw" style="background:var(--minium);color:var(--minium-ink)"><div><b>Minium</b>Brand, primary action, focus</div><span>#F5723A<br>6.2:1 with ink text</span></div>
+      <div class="sw" style="background:#eeebe1;color:#06191c"><div><b>Chalk 100</b>Text</div><span>#EEEBE1<br>15.1:1</span></div>
+      <div class="sw" style="background:#afbab6;color:#06191c"><div><b>Chalk 300</b>Secondary text</div><span>#AFBAB6<br>9.0:1</span></div>
+      <div class="sw" style="background:#8b9898;color:#06191c"><div><b>Chalk 500</b>Labels, hints</div><span>#8B9898<br>6.1:1</span></div>
+      <div class="sw" style="background:var(--verdigris);color:#06191c"><div><b>Verdigris</b>Money in, cleared</div><span>#63CEAF</span></div>
+      <div class="sw" style="background:var(--saffron);color:#06191c"><div><b>Saffron</b>Nearing a limit</div><span>#EAC25A</span></div>
+    </div>
+    <div class="signals" style="grid-template-columns:1fr 3fr">
+      <div class="sw" style="background:var(--madder);color:#06191c;min-height:84px"><div><b>Madder</b>Over budget, delete</div><span>#ED647C</span></div>
+      <div class="sw" style="background:var(--surface);border:1px solid var(--line);min-height:84px;color:var(--text-2)"><div><b style="color:var(--text)">Spending is not an alarm</b>Outgoing amounts stay chalk. Colour is spent only on money in, and on limits being crossed, so a red number always means a real problem.</div></div>
+    </div>
+    <div class="cats">
+      <div class="cat-sw"><i style="background:var(--cat-groceries)"></i>Groceries<span>#84C47D</span></div>
+      <div class="cat-sw"><i style="background:var(--cat-dining)"></i>Dining<span>#E9A364</span></div>
+      <div class="cat-sw"><i style="background:var(--cat-transport)"></i>Transport<span>#69AFE8</span></div>
+      <div class="cat-sw"><i style="background:var(--cat-shopping)"></i>Shopping<span>#CF88C8</span></div>
+      <div class="cat-sw"><i style="background:var(--cat-gifts)"></i>Gifts<span>#EB8A9C</span></div>
+      <div class="cat-sw"><i style="background:var(--cat-entertainment)"></i>Entertainment<span>#A198EB</span></div>
+      <div class="cat-sw"><i style="background:var(--cat-health)"></i>Health<span>#5BC8C8</span></div>
+      <div class="cat-sw"><i style="background:var(--cat-utilities)"></i>Utilities<span>#D0BF5E</span></div>
+      <div class="cat-sw"><i style="background:var(--cat-misc)"></i>Misc<span>#8DA3A4</span></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Type</p>
+    <h2>One face to name things, one to read them.</h2>
+    <p class="lede">Bricolage Grotesque gives titles and headline figures a slightly hand-cut character. Instrument Sans carries the dense table text. Both have true tabular figures, so amounts line up to the cent.</p>
+    <div class="type">
+      <div class="spec"><div class="name">Display · Bricolage Grotesque 600–700</div><div class="big disp">Aa 4,210</div><p>Page titles, the wordmark, headline figures. Tight tracking (−1.5% to −4%).</p></div>
+      <div class="spec"><div class="name">Interface · Instrument Sans 400–700</div><div class="big ui">Aa 4,210</div><p>Tables, forms, navigation. 13px in the ledger, 15px for reading.</p></div>
+    </div>
+    <div class="ledgerdemo num">
+      <div><div class="k">Left to spend · September</div><div class="v">$1,284<span class="cents" style="opacity:.55">.60</span></div><div class="n">of $3,400.00 · 9 days remain</div></div>
+      <div><div class="k">Money in</div><div class="v amount-in">+$5,120<span class="cents" style="opacity:.55">.00</span></div><div class="n">2 deposits</div></div>
+      <div><div class="k">Money out</div><div class="v">−$2,115<span class="cents" style="opacity:.55">.40</span></div><div class="n">41 transactions</div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Components</p>
+    <h2>The same few moves everywhere.</h2>
+    <p class="lede">The tally stroke is the system’s one recurring device: it marks the page you’re on, the suggestion you’re about to pick, and a transaction that’s been counted as cleared.</p>
+    <div class="kit">
+      <div class="spec">
+        <div class="name">Buttons &amp; status</div>
+        <div class="inline"><button class="btn btn-primary">New transaction</button><button class="btn btn-ghost">Export CSV</button><button class="btn btn-ghost" style="color:var(--danger);border-color:rgb(237 100 124 / .35)">Delete</button></div>
+        <div class="inline"><span class="chip in">Cleared</span><span class="chip brand">Needs category</span><span class="chip warn">82% of budget</span><span class="chip over">Over by $42</span></div>
+        <div class="inline" style="gap:24px">
+          <span class="inline" style="gap:10px;color:var(--text-2)"><span class="ring"></span>Not cleared</span>
+          <span class="inline" style="gap:10px;color:var(--text-2)"><span class="tick"></span>Cleared</span>
+        </div>
+        <div class="field" style="border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft);color:var(--text)"><input value="Trader Joe’s" aria-label="Focused input"></div>
+      </div>
+      <div class="spec">
+        <div class="name">Budgets</div>
+        <div class="budget num">
+          <div><div class="l"><span>Groceries</span><span>$412 / $500</span></div><div class="bar"><i style="width:82%;background:var(--cat-groceries)"></i></div></div>
+          <div><div class="l"><span>Dining</span><span>$318 / $300</span></div><div class="bar"><i style="width:100%;background:var(--danger)"></i></div></div>
+          <div><div class="l"><span>Transport</span><span>$96 / $200</span></div><div class="bar"><i style="width:48%;background:var(--cat-transport)"></i></div></div>
+          <div><div class="l"><span>Shopping</span><span>$140 / $250</span></div><div class="bar"><i style="width:56%;background:var(--cat-shopping)"></i></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

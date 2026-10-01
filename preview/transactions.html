@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transactions · Tally</title>
+<link rel="icon" href="../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../theme/tokens.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="9" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="5" rx="1.5"/><rect x="13.5" y="11.5" width="7" height="9" rx="1.5"/><rect x="3.5" y="15.5" width="7" height="5" rx="1.5"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14m-4-4 4 4-4 4M20 16H6m4-4-4 4 4 4"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5 12 4l8.5 5.5M5.5 10v7M10 10v7M14 10v7M18.5 10v7M3.5 20h17"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h3"/></symbol>
+    <symbol id="i-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v8.5h8.5A8.5 8.5 0 1 1 12 3.5Z"/><path d="M15.5 3.9a8.5 8.5 0 0 1 4.6 4.6h-4.6Z"/></symbol>
+    <symbol id="i-goal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8" fill="currentColor"/></symbol>
+    <symbol id="i-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></symbol>
+    <symbol id="i-import" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10m-4-4 4 4 4-4M4.5 15v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9m4 0h3M4 17h3m4 0h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M9.5 4.5v15"/></symbol>
+    <symbol id="i-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6v6a2 2 0 0 1-2 2H5m4-4-4 4 4 4"/></symbol>
+    <symbol id="i-xfer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h13m-3-3 3 3-3 3M19 16H6m3-3-3 3 3 3"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="../brand/tally-logo.svg" alt="Tally">
+      <button class="icon-btn" aria-label="Collapse sidebar"><svg width="18" height="18"><use href="#i-panel"/></svg></button>
+    </div>
+    <nav class="nav" aria-label="Main">
+      <a href="#"><svg><use href="#i-dash"/></svg>Dashboard</a>
+      <a href="#" aria-current="page"><svg><use href="#i-swap"/></svg>Transactions</a>
+      <a href="#"><svg><use href="#i-bank"/></svg>Accounts</a>
+      <a href="#"><svg><use href="#i-card"/></svg>Cards</a>
+      <a href="#"><svg><use href="#i-pie"/></svg>Budgets</a>
+      <a href="#"><svg><use href="#i-goal"/></svg>Goals</a>
+      <a href="#"><svg><use href="#i-bars"/></svg>Reports</a>
+      <a href="#"><svg><use href="#i-import"/></svg>Import</a>
+      <a href="#"><svg><use href="#i-gear"/></svg>Settings</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="page-head">
+      <h1>Transactions</h1>
+      <button class="btn btn-primary"><svg><use href="#i-plus"/></svg>New transaction</button>
+    </header>
+
+    <div class="filters">
+      <label class="field search"><svg><use href="#i-search"/></svg><input placeholder="Search payee or memo"></label>
+      <label class="field date"><input placeholder="From"></label>
+      <label class="field date"><input placeholder="To"></label>
+      <div class="field select">All accounts <svg><use href="#i-chev"/></svg></div>
+      <div class="field select">Any category <svg><use href="#i-chev"/></svg></div>
+      <label class="field num-in"><input placeholder="Min"></label>
+      <label class="field num-in"><input placeholder="Max"></label>
+      <div class="field select">Cleared or not <svg><use href="#i-chev"/></svg></div>
+    </div>
+
+    <section class="ledger" aria-label="Transactions">
+      <div class="row head" role="row">
+        <div>Date</div><div class="col-acct">Account</div><div>Payee</div><div class="col-cat">Category</div><div class="col-memo">Memo</div><div class="r">Amount</div><div></div>
+      </div>
+
+      <div class="row entry">
+        <div><input class="cell-input" value="9/28" aria-label="Date"></div>
+        <div class="col-acct"><div class="cell-input" style="display:flex;align-items:center;justify-content:space-between">Everyday checking <svg width="12" height="12" style="color:var(--text-3)"><use href="#i-chev"/></svg></div></div>
+        <div style="position:relative">
+          <input class="cell-input" value="Tr" aria-label="Payee" autofocus style="border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)">
+          <div class="suggest" role="listbox">
+            <div role="option" aria-selected="true"><span><b>Tr</b>ader Joe’s</span></div>
+            <div role="option"><span>Clipper <b>Tr</b>ansit</span></div>
+            <div role="option"><span>AMC Thea<b>tr</b>es</span></div>
+            <div role="option"><span>Food <b>Tr</b>uck</span></div>
+            <div role="option"><span>Pacific Gas and Elec<b>tr</b>ic</span></div>
+            <div role="option"><span>Am<b>tr</b>ak</span></div>
+          </div>
+        </div>
+        <div class="col-cat"><input class="cell-input" placeholder="Category" aria-label="Category"></div>
+        <div class="col-memo"><input class="cell-input" placeholder="Memo" aria-label="Memo"></div>
+        <div><input class="cell-input r" placeholder="0.00" aria-label="Amount"></div>
+        <div class="enter"><svg><use href="#i-enter"/></svg></div>
+      </div>
+
+      <div id="rows"></div>
+    </section>
+
+    <footer class="foot">
+      <div class="left num"><span>50,461 transactions</span><span>Total<span class="total">$410,679.40</span></span></div>
+      <button class="link">Export CSV</button>
+    </footer>
+  </main>
+</div>
+
+<script>
+// sample data mirrors the original screenshot
+const acct = {
+  "Mastercard": "var(--cat-shopping)", "Wallet": "var(--cat-utilities)",
+  "Visa card": "var(--cat-dining)", "Everyday checking": "var(--cat-transport)"
+};
+const cat = {
+  Gifts: "gifts", Dining: "dining", Misc: "misc", Shopping: "shopping",
+  Transport: "transport", Groceries: "groceries"
+};
+// [date, account, payee, category, memo, amount, cleared]
+const D = [
+ ["Sep 27","Mastercard","Flower Shop","Gifts","",-74.76,0],
+ ["Sep 27","Wallet","Philz Coffee","Dining","",-10.59,1],
+ ["Sep 27","Mastercard","Post Office","Misc","",-7.52,0],
+ ["Sep 27","Visa card","Target","Shopping","",-32.95,0],
+ ["Sep 27","Mastercard","Uniqlo","Shopping","",-35.72,1],
+ ["Sep 27","Mastercard","IKEA","Shopping","",-57.61,0],
+ ["Sep 27","Mastercard","Lyft","Transport","",-7.28,1],
+ ["Sep 27","Mastercard","City Parking","Transport","",-29.89,0],
+ ["Sep 27","Visa card","Trader Joe’s","Groceries","",-42.96,0],
+ ["Sep 27","Visa card","Starbucks","Dining","",-21.21,1],
+ ["Sep 27","Mastercard","Starbucks","Dining","",-7.11,0],
+ ["Sep 27","Everyday checking","Blue Bottle Coffee","Dining","",-17.36,1],
+ ["Sep 27","Mastercard","Souvla","Dining","",-5.09,0],
+ ["Sep 26","Wallet","Transfer",{to:"Everyday checking"},"ATM",100.00,1],
+ ["Sep 26","Everyday checking","Transfer",{to:"Wallet"},"ATM",-100.00,1],
+ ["Sep 26","Visa card","Flower Shop","Gifts","",-113.88,0],
+ ["Sep 26","Wallet","Corner Store","Dining","",-7.29,0],
+ ["Sep 26","Visa card","Green Apple Books","Misc","",-13.77,0],
+];
+const fmt = (n, xfer) => {
+  const a = Math.abs(n).toFixed(2), [w, c] = a.split(".");
+  const whole = Number(w).toLocaleString("en-US");
+  const sign = n < 0 ? "−" : (xfer || n > 0 ? "+" : "");
+  return `${sign}$${whole}<span class="cents">.${c}</span>`;
+};
+document.getElementById("rows").innerHTML = D.map(([d,a,p,c,m,v,cl]) => {
+  const x = typeof c === "object";
+  const catCell = x
+    ? `<div class="cat transfer col-cat"><svg><use href="#i-xfer"/></svg>${c.to}</div>`
+    : `<div class="cat col-cat"><span class="dot" style="background:var(--cat-${cat[c]})"></span>${c}</div>`;
+  const cls = x ? (v > 0 ? "amount-in" : "") : "";
+  const money = x ? (v > 0 ? "amount-in" : "") : "amount-out";
+  return `<div class="row body" role="row">
+    <div class="num">${d}</div>
+    <div class="acct col-acct"><span class="dot" style="background:${acct[a]}"></span>${a}</div>
+    <div class="payee" style="${x ? "color:var(--text-2);font-weight:400" : ""}">${p}</div>
+    ${catCell}
+    <div class="memo col-memo">${m}</div>
+    <div class="amt num ${money}">${fmt(v, x)}</div>
+    <div class="mark"><button aria-label="${cl ? "Cleared" : "Not cleared"}" title="${cl ? "Cleared" : "Not cleared"}">${cl ? '<span class="tick"></span>' : '<span class="ring"></span>'}</button></div>
+  </div>`;
+}).join("");
+</script>
+</body>
+</html>
