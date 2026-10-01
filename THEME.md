@@ -1,11 +1,11 @@
-# Tally: theme and logo
+# Kept: theme and logo
 
 Direction: **warm graphite, soft chalk figures, one dusty-rose accent.**
 The logo is a tally mark: four counted strokes, one struck across.
 
 > **Heads-up:** this repo had no app code when I built this, so the kit is a drop-in plus a faithful
 > recreation of the Transactions screen. Once the app source is in the repo, apply it with the steps below.
-> "Tally" is a working name. See `CLAUDE.md` for how to rename.
+> "Kept" is a working name; renaming is one command (see `CLAUDE.md`).
 
 ## Change the theme by asking Claude Code
 
@@ -74,5 +74,5 @@ Rules that keep it feeling designed:
 3. **Colours.** Replace hard-coded colours with the semantic tokens. A good first prompt for Claude Code:
    *"Replace every hard-coded colour in the app with the tokens in theme/tokens.css, following CLAUDE.md."*
    With Tailwind v4, expose them in `@theme`, e.g. `--color-surface: var(--surface);`.
-4. **Logo and icons.** `brand/tally-logo.svg` in the sidebar header (36px tall); `brand/favicon.svg` → `app/icon.svg`; `brand/png/apple-touch-icon.png` → `app/apple-icon.png`; `icon-192.png` / `icon-512.png` for a manifest.
+4. **Logo and icons.** `brand/logo.svg` in the sidebar header (36px tall); `brand/favicon.svg` → `app/icon.svg`; `brand/png/apple-touch-icon.png` → `app/apple-icon.png`; `icon-192.png` / `icon-512.png` for a manifest.
 5. **Cleared column.** Tally stroke (`.tick`) when cleared, open ring (`.ring`) when not. See `preview/app.css`.

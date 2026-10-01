@@ -3,7 +3,7 @@
 //   node scripts/sync-brand.mjs            # SVGs + contrast report (+ PNGs if playwright is installed)
 //   node scripts/sync-brand.mjs --strict   # exit 1 if any text pair is below WCAG AA
 // No dependencies. PNG export is skipped (with a note) unless `playwright` can be imported.
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
@@ -11,6 +11,8 @@ import { createRequire } from "node:module";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const css = readFileSync(join(root, "theme/tokens.css"), "utf8");
 const wm = JSON.parse(readFileSync(join(root, "brand/src/wordmark.json"), "utf8"));
+const NAME = JSON.parse(readFileSync(join(root, "brand/brand.json"), "utf8")).name; // set by scripts/set-wordmark.py
+const xml = (t) => t.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 // ---- tokens --------------------------------------------------------------
 const tok = {};
@@ -34,7 +36,7 @@ function markBody(bar, strike, id, sw = 5.4, knock = 11.2) {
   <g mask="url(#${id})" stroke="${bar}" stroke-width="${sw}" stroke-linecap="round">${bars}</g>
   <line x1="8.5" y1="44.5" x2="55.5" y2="21.5" stroke="${strike}" stroke-width="${sw}" stroke-linecap="round"/>`;
 }
-const svg64 = (body) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Tally">\n  ${body}\n</svg>\n`;
+const svg64 = (body) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="${xml(NAME)}">\n  ${body}\n</svg>\n`;
 
 function favicon() {
   const bars = [16.5, 26, 35.5, 45].map((x) => `<line x1="${x}" y1="13" x2="${x}" y2="51"/>`).join("");
@@ -58,7 +60,7 @@ function lockup(bar, strike, wordFill, id) {
   const markW = xb + stem / 2 + 3, tx = markW + 9;
   const W = tx + wm.width + 2, H = B + 0.22 * size + 2;
   const bars = xs.map((x) => `<line x1="${f(x)}" y1="${f(y1)}" x2="${f(x)}" y2="${f(y2)}"/>`).join("");
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${f(W)} ${f(H)}" role="img" aria-label="Tally">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${f(W)} ${f(H)}" role="img" aria-label="${xml(NAME)}">
   <mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="${f(markW)}" height="${f(H)}"><rect width="${f(markW)}" height="${f(H)}" fill="#fff"/>
     <line x1="${f(xa)}" y1="${f(ya)}" x2="${f(xb)}" y2="${f(yb)}" stroke="#000" stroke-width="${f(knock)}" stroke-linecap="round"/></mask>
   <g mask="url(#${id})" stroke="${bar}" stroke-width="${stem}" stroke-linecap="round">${bars}</g>
@@ -68,21 +70,23 @@ function lockup(bar, strike, wordFill, id) {
 }
 
 const out = {
-  "tally-mark.svg": svg64(markBody(CHALK, ACCENT, "k1")),
-  "tally-mark-on-light.svg": svg64(markBody(INK, ACCENT_DEEP, "k2")),
-  "tally-mark-on-accent.svg": svg64(markBody(INK, CHALK, "k3")),
-  "tally-icon.svg": svg64(`<rect width="64" height="64" rx="15" fill="${TILE}"/>
+  "mark.svg": svg64(markBody(CHALK, ACCENT, "k1")),
+  "mark-on-light.svg": svg64(markBody(INK, ACCENT_DEEP, "k2")),
+  "mark-on-accent.svg": svg64(markBody(INK, CHALK, "k3")),
+  "icon.svg": svg64(`<rect width="64" height="64" rx="15" fill="${TILE}"/>
   <rect x=".5" y=".5" width="63" height="63" rx="14.5" fill="none" stroke="${LINE}"/>
   ${markBody(CHALK, ACCENT, "k4")}`),
-  "tally-icon-square.svg": svg64(`<rect width="64" height="64" fill="${TILE}"/>\n  ${markBody(CHALK, ACCENT, "k5")}`),
+  "icon-square.svg": svg64(`<rect width="64" height="64" fill="${TILE}"/>\n  ${markBody(CHALK, ACCENT, "k5")}`),
   "favicon.svg": favicon(),
-  "tally-logo.svg": lockup(CHALK, ACCENT, CHALK, "k6"),
-  "tally-logo-on-light.svg": lockup(INK, ACCENT_DEEP, INK, "k7"),
-  "tally-wordmark.svg": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 ${f(-wm.size * 0.78)} ${f(wm.width)} ${f(wm.size * 1.08)}" role="img" aria-label="Tally"><path d="${wm.d}" fill="${CHALK}"/></svg>\n`,
+  "logo.svg": lockup(CHALK, ACCENT, CHALK, "k6"),
+  "logo-on-light.svg": lockup(INK, ACCENT_DEEP, INK, "k7"),
+  "wordmark.svg": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 ${f(-wm.size * 0.78)} ${f(wm.width)} ${f(wm.size * 1.08)}" role="img" aria-label="${xml(NAME)}"><path d="${wm.d}" fill="${CHALK}"/></svg>\n`,
 };
 mkdirSync(join(root, "brand"), { recursive: true });
 for (const [name, body] of Object.entries(out)) writeFileSync(join(root, "brand", name), body);
-console.log(`wrote ${Object.keys(out).length} SVGs to brand/`);
+// generated files only: drop SVGs left over from older versions (e.g. a previous product name)
+for (const f of readdirSync(join(root, "brand"))) if (f.endsWith(".svg") && !out[f]) { unlinkSync(join(root, "brand", f)); console.log("removed stale brand/" + f); }
+console.log(`wrote ${Object.keys(out).length} SVGs to brand/ for "${NAME}"`);
 
 // ---- contrast report -----------------------------------------------------
 const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
@@ -114,7 +118,7 @@ try {
   const { chromium } = createRequire(import.meta.url)("playwright");
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   mkdirSync(join(root, "brand/png"), { recursive: true });
-  const jobs = [["tally-icon.svg", "icon-512.png", 512, true], ["tally-icon.svg", "icon-192.png", 192, true], ["tally-icon-square.svg", "apple-touch-icon.png", 180, false], ["favicon.svg", "favicon-32.png", 32, true], ["favicon.svg", "favicon-16.png", 16, true]];
+  const jobs = [["icon.svg", "icon-512.png", 512, true], ["icon.svg", "icon-192.png", 192, true], ["icon-square.svg", "apple-touch-icon.png", 180, false], ["favicon.svg", "favicon-32.png", 32, true], ["favicon.svg", "favicon-16.png", 16, true]];
   for (const [src, name, size, transparent] of jobs) {
     const page = await browser.newPage({ viewport: { width: size, height: size } });
     await page.setContent(`<style>html,body{margin:0;background:transparent}svg{display:block;width:${size}px;height:${size}px}</style>${out[src]}`);

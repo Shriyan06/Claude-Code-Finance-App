@@ -1,4 +1,4 @@
-# Tally: working notes for Claude Code
+# Kept: working notes for Claude Code
 
 ## Theming: how to change how the app looks
 
@@ -34,7 +34,16 @@ Then look at the result: open `preview/transactions.html` and `preview/brand.htm
 ### Logo
 
 `brand/*.svg` are generated. Don't edit them by hand; edit `scripts/sync-brand.mjs` (geometry) or `theme/tokens.css` (colour) and re-run. The wordmark outline is stored in `brand/src/wordmark.json`.
-To rename the product, replace the outline: set the text in Bricolage Grotesque 700 and convert it to a path, then update `wordmark.json` (`d`, `width`).
+To rename the product (needs `pip install fonttools brotli` once):
+
+```bash
+python3 scripts/set-wordmark.py "New Name"   # outlines the name, updates brand/src/wordmark.json and brand/brand.json
+node scripts/sync-brand.mjs                  # regenerates every logo file with the new name
+```
+
+Then search for the old name in `preview/*.html` (page titles, `alt` text, brand-board copy) and in `THEME.md`, `CLAUDE.md` and the `tokens.css` header, and update it.
+Leave "tally" alone where it means the mark itself ("tally stroke", `.tick`): that's the logo concept, not the product name.
+Logo filenames are name-independent (`logo.svg`, `mark.svg`, `icon.svg`, ...), so nothing else needs renaming.
 
 ### Copy on the brand board
 

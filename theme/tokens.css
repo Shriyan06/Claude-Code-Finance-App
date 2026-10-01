@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TALLY — design tokens
+   KEPT — design tokens
    Warm graphite, soft chalk text, one dusty-rose accent.
    THIS FILE IS THE ONLY PLACE COLOURS ARE DEFINED. Components read the semantic
    aliases below; after editing, run `node scripts/sync-brand.mjs`.
